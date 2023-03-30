@@ -1,0 +1,97 @@
+<template>
+  <div class="wrapper">
+    <div class="wrapper-content">
+      <section>
+        <div class="container">
+          <h1>{{title}}</h1>
+
+
+          <message></message>
+          <div class="message" v-if="message">
+              <p>{{message}}</p>
+          </div>
+
+          <!-- new note -->
+          <div class="new-note">
+              <input v-model="note.title" type="text">
+              <textarea v-model="note.description"></textarea>
+              <button @click="addNote">New note</button>
+          </div>
+
+          <!--note list-->
+          <div class="note" v-for="(note, index) in notes" :key="index">
+              <div class="note-header">
+                  <p>{{note.title}}</p>
+              </div>
+              <div class="note-body">
+                  <p>{{note.description}}</p>
+                  <span>{{note.date}}</span>
+              </div>
+          </div>
+        </div>
+      </section>
+      
+    </div>
+  </div>
+
+</template>
+
+<script>
+import message from '@/components/Message.vue'
+
+export default {
+  components:{
+    message
+  },
+  data() {
+    return {
+      title: 'Notes App',
+      message: null,
+      note:{
+          title: '',
+          description: ''
+      },
+      notes: [
+          {
+              title: 'First Note',
+              description: 'This is first note',
+              date: new Date(Date.now()).toLocaleString()
+          },
+          {
+              title: 'Second Note',
+              description: 'This is second note',
+              date: new Date(Date.now()).toLocaleString()
+          },
+          {
+              title: 'Third Note',
+              description: 'This is third note',
+              date: new Date(Date.now()).toLocaleString()
+          }
+      ]
+    }
+  },
+  methods:{
+            addNote(){
+                //console.log(this.note)
+                let note = this.note;
+
+                if(note.title === '') {
+                    this.message = 'title can`t be blank';
+                    return false;
+                }
+                this.notes.push({
+                    title: note.title,
+                    description: note.description,
+                    date: new Date(Date.now()).toLocaleString()
+                })
+                note.title = '';
+                note.description = '';
+                this.message = null;
+            }
+        }
+  
+}
+</script>
+
+<style>
+</style>
