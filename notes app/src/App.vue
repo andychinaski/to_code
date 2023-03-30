@@ -5,21 +5,11 @@
         <div class="container">
           <h1>{{title}}</h1>
 
-
           <message v-if="message" :message="message"/>
 
           <newNote :note="note" @addNote='addNote'/>
 
-          <!--note list-->
-          <div class="note" v-for="(note, index) in notes" :key="index">
-              <div class="note-header">
-                  <p>{{note.title}}</p>
-              </div>
-              <div class="note-body">
-                  <p>{{note.description}}</p>
-                  <span>{{note.date}}</span>
-              </div>
-          </div>
+          <notes :notes="notes"/>
         </div>
       </section>
       
@@ -31,10 +21,11 @@
 <script>
 import message from '@/components/Message.vue'
 import newNote from '@/components/NewNote.vue'
+import notes from '@/components/Notes.vue'
 
 export default {
   components:{
-    message, newNote
+    message, notes, newNote
   },
   data() {
     return {
