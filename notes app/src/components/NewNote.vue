@@ -28,6 +28,6 @@ export default {
     text-align: center;
 }
 button{
-    margin-top: 1em;
+    margin: 1em;
 }
 </style>
